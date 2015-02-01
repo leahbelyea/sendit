@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SendIt</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_edit_route">Edit Route</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_view_routes_list">View Routes List</string>
+
+    <!-- Icons -->
+    <string name="icon_plus">&#xf067;</string>
+    <string name="icon_bars">&#xf0c9;</string>
+    <string name="icon_star">&#xf005;</string>
+    <string name="icon_star_o">&#xf006;</string>
+    <string name="icon_camera">&#xf030;</string>
+    <string name="icon_trash_o">&#xf014;</string>
+    <string name="icon_pencil">&#xf040;</string>
+    <string name="icon_map_marker">&#xf041;</string>
+    <string name="icon_calendar">&#xf073;</string>
+    <string name="icon_mountain">&#xe800;</string>
+    <string name="icon_pencil_square_o">&#xf044;</string>
+    <string name="icon_times">&#xf00d;</string>
+
+    <!-- Send Types -->
+    <string-array name="send_types">
+        <item>Send Type</item>
+        <item>Onsight</item>
+        <item>Flash</item>
+        <item>Redpoint</item>
+        <item>Just made it to the top!</item>
+        <item>Maybe next time...</item>
+    </string-array>
+
+    <!-- Grade Numbers -->
+    <string-array name="grade_numbers">
+        <item>5.1</item>
+        <item>5.2</item>
+        <item>5.3</item>
+        <item>5.4</item>
+        <item>5.5</item>
+        <item>5.6</item>
+        <item>5.7</item>
+        <item>5.8</item>
+        <item>5.9</item>
+        <item>5.10</item>
+        <item>5.11</item>
+        <item>5.12</item>
+        <item>5.13</item>
+        <item>5.14</item>
+        <item>5.15</item>
+    </string-array>
+
+    <!-- Grade Qualifiers -->
+    <string-array name="grade_qualifiers">
+        <item></item>
+        <item>-</item>
+        <item>+</item>
+        <item>a</item>
+        <item>b</item>
+        <item>c</item>
+        <item>d</item>
+    </string-array>
+    
+    <!-- Filter Operators -->
+    <string-array name="operators">
+        <item>=</item>
+        <item>&lt;=</item>
+        <item>&lt;</item>
+        <item>&gt;=</item>
+        <item>&gt;</item>
+    </string-array>
+    
+    <!-- Ratings -->
+    <string-array name="ratings">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string name="title_activity_view_route">ViewRoute</string>
+    <string name="title_activity_view_routes">ViewRoutes</string>
+
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+        <TextView
+	        android:id="@+id/actionbar_tv_list"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+    		android:drawablePadding="5dp"
+	        android:drawableLeft="@drawable/ic_action_view_as_list"
+	        android:background="@drawable/tab_selected"
+	        android:textSize="20sp"
+	        android:textColor="#ffffff"
+	        android:gravity="left|center"/>
+        
+        <TextView
+	        android:id="@+id/actionbar_tv_tab_separator"
+	        android:layout_width="1dp"
+	        android:layout_height="match_parent"
+	        android:layout_marginTop="10dp"
+	        android:layout_marginBottom="10dp"
+	        android:layout_marginLeft="0dp"
+	        android:layout_marginRight="0dp"
+	        android:background="@drawable/tab_separator"
+	        android:layout_toRightOf="@+id/actionbar_tv_list" />
+        
+        <TextView
+	        android:id="@+id/actionbar_tv_map"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+    		android:drawablePadding="5dp"
+	        android:drawableLeft="@drawable/ic_action_map"
+	        android:background="@drawable/tab_not_selected"
+	        android:layout_toRightOf="@+id/actionbar_tv_tab_separator"
+	        android:textSize="20sp"
+	        android:textColor="#ffffff"
+	        android:gravity="left|center"/>
+</RelativeLayout>

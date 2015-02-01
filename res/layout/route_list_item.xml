@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp" >
+    
+   	<RelativeLayout
+   	    android:id="@+id/route_list_item_rl_picture"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginRight="10dp"
+    	android:layout_alignParentLeft="true"
+    	android:layout_centerInParent="true"
+        android:gravity="center" >
+    
+	    <com.sendit.ListPicture
+    		android:id="@+id/route_list_item_iv_picture"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:background="#cccccc"
+	        android:scaleType="centerCrop" />
+	    
+	   	<TextView
+	        android:id="@+id/route_list_item_tv_photo_icon"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerInParent="true"
+	        android:textSize="30sp"
+	        android:text="@string/icon_camera" />
+    
+    </RelativeLayout>
+        
+    <TextView 
+        android:layout_height="wrap_content" 
+        android:layout_width="wrap_content"
+        android:layout_toRightOf="@id/route_list_item_rl_picture"
+        android:textSize="20sp"
+        android:id="@+id/route_list_item_tv_route_name"/>
+    
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_toRightOf="@id/route_list_item_rl_picture"
+        android:layout_below="@id/route_list_item_tv_route_name"
+        android:textSize="15sp"
+        android:id="@+id/route_list_item_tv_wall_crag" />
+    
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_toRightOf="@id/route_list_item_rl_picture"
+        android:layout_below="@id/route_list_item_tv_wall_crag"
+        android:textSize="15sp"
+        android:id="@+id/route_list_item_tv_date" />
+    
+</RelativeLayout>

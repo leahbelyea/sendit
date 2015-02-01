@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:id="@+id/filter_builder_ll_rating"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+    	android:padding="10dp"
+    	android:layout_marginBottom="20dp"
+	    android:background="#eeeeee" >
+
+        <CheckBox
+            android:id="@+id/filter_builder_cb_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+	    
+	    <TextView
+	        android:layout_height="wrap_content"
+	        android:layout_width="wrap_content"
+	        android:textSize="15sp"
+	        android:text="Rating" />
+    
+	    <Spinner
+	        android:id="@+id/filter_builder_sp_rating_operator"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="20dp" />
+	   	    
+	   	<Spinner
+	        android:id="@+id/filter_builder_sp_rating"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="20dp" />
+	   	
+	</LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/filter_builder_ll_date"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+    	android:padding="10dp"
+    	android:layout_marginBottom="20dp"
+    	android:gravity="left|center"
+	    android:background="#eeeeee" >
+
+        <CheckBox
+            android:id="@+id/filter_builder_cb_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+	    
+	    <TextView
+	        android:layout_height="wrap_content"
+	        android:layout_width="wrap_content"
+	        android:textSize="15sp"
+	        android:text="Date" />
+    
+	    <Spinner
+	        android:id="@+id/filter_builder_sp_date_operator"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="20dp" />
+	   	    
+	    <EditText
+	        android:id="@+id/filter_builder_et_date"
+	        android:layout_width="100dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="20dp"
+	        android:focusableInTouchMode="false"
+	        android:textSize="15sp"
+	        android:inputType="date"
+	        android:background="@drawable/single_border"
+	        android:padding="3dp"
+	        android:gravity="center"
+	        android:hint="Date" />
+	   	
+	</LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/filter_builder_ll_send_type"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+    	android:padding="10dp"
+    	android:layout_marginBottom="20dp"
+    	android:gravity="left|center"
+	    android:background="#eeeeee" >
+
+        <CheckBox
+            android:id="@+id/filter_builder_cb_send_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+	    
+	    <TextView
+	        android:layout_height="wrap_content"
+	        android:layout_width="wrap_content"
+	        android:textSize="15sp"
+	        android:text="Send Type" />
+	   	    
+	   	<Spinner
+	        android:id="@+id/filter_builder_sp_send_type"
+	        android:layout_width="120dp"
+	    android:layout_marginLeft="20dp"
+	        android:layout_height="wrap_content" />
+	   	
+	</LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/filter_builder_ll_keyword"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+    	android:padding="10dp"
+    	android:layout_marginBottom="20dp"
+    	android:gravity="left|center"
+	    android:background="#eeeeee" >
+
+        <CheckBox
+            android:id="@+id/filter_builder_cb_keyword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+	    
+	    <TextView
+	        android:layout_height="wrap_content"
+	        android:layout_width="80dp"
+	        android:textSize="15sp"
+	        android:layout_marginRight="5dp"
+	        android:text="Keyword Search" />
+	   	    
+	    <EditText
+	        android:id="@+id/filter_builder_et_keyword"
+	        android:layout_width="120dp"
+	        android:layout_height="wrap_content"
+	        android:textSize="15sp"
+	        android:background="@drawable/single_border"
+	        android:padding="3dp"
+	        android:gravity="center"
+	        android:hint="Keyword" />
+	   	
+	</LinearLayout>
+    
+</LinearLayout>
