@@ -3,6 +3,7 @@ package com.sendit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -12,7 +13,8 @@ public class Route implements Parcelable {
 	private int id;
 	private String name; 
 	private String photo_path;
-	private String grade;
+	private int grade_number;
+	private String grade_modifier;
 	private String crag;
 	private String wall;
 	private Location location;
@@ -22,11 +24,12 @@ public class Route implements Parcelable {
 	private String notes;
 	public static String parcelable_format = "dd/MM/yyyy";
 	
-	public Route(int id, String name, String photo_path, String grade, String crag, String wall, Location location, Long date, String send_type, int rating, String notes) {
+	public Route(int id, String name, String photo_path, int grade_number, String grade_modifier, String crag, String wall, Location location, Long date, String send_type, int rating, String notes) {
 		this.id = id;
 		this.name = name;
 		this.photo_path = photo_path;
-		this.grade = grade;
+		this.grade_number = grade_number;
+		this.grade_modifier = grade_modifier;
 		this.crag = crag;
 		this.wall = wall;
 		this.location = location;
@@ -36,10 +39,11 @@ public class Route implements Parcelable {
 		this.notes = notes;
 	}	
 	
-	public Route(String name, String photo_path, String grade, String crag, String wall, Location location, Long date, String send_type, int rating, String notes) {
+	public Route(String name, String photo_path, int grade_number, String grade_modifier, String crag, String wall, Location location, Long date, String send_type, int rating, String notes) {
 		this.name = name;
 		this.photo_path = photo_path;
-		this.grade = grade;
+		this.grade_number = grade_number;
+		this.grade_modifier = grade_modifier;
 		this.crag = crag;
 		this.wall = wall;
 		this.location = location;
@@ -53,7 +57,8 @@ public class Route implements Parcelable {
 		this.id = parcel.readInt();
 		this.name = parcel.readString();
 		this.photo_path = parcel.readString();
-		this.grade = parcel.readString();
+		this.grade_number = parcel.readInt();
+		this.grade_modifier = parcel.readString();
 		this.crag = parcel.readString();
 		this.wall = parcel.readString();
 		this.location = stringToLocation(parcel.readString());
@@ -87,12 +92,24 @@ public class Route implements Parcelable {
 		return this.photo_path;
 	}
 
-	public void setGrade(String grade) {
-		this.grade = grade;
+	public void setGradeNumber(int grade_number) {
+		this.grade_number = grade_number;
+	}
+
+	public void setGradeModifier(String grade_modifier) {
+		this.grade_modifier = grade_modifier;
+	}
+
+	public int getGradeNumber() {
+		return this.grade_number;
+	}
+
+	public String getGradeModifier() {
+		return this.grade_modifier;
 	}
 	
 	public String getGrade() {
-		return this.grade;
+		return "5." + this.grade_number + this.grade_modifier;
 	}
 	
 	public void setCrag(String crag) {
@@ -219,7 +236,8 @@ public class Route implements Parcelable {
 		parcel.writeInt(id);
 		parcel.writeString(name);
 		parcel.writeString(photo_path);
-		parcel.writeString(grade);
+		parcel.writeInt(grade_number);
+		parcel.writeString(grade_modifier);
 		parcel.writeString(crag);
 		parcel.writeString(wall);
 		parcel.writeString(locationToString(location));

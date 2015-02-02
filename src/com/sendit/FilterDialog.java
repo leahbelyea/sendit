@@ -45,10 +45,21 @@ public class FilterDialog extends DialogFragment {
 	    View view = inflater.inflate(R.layout.filter_builder, null);
 	    builder.setView(view).setTitle("Filter These Results");
 
+	    final CheckBox cb_grade = (CheckBox)view.findViewById(R.id.filter_builder_cb_grade);
 	    final CheckBox cb_rating = (CheckBox)view.findViewById(R.id.filter_builder_cb_rating);
 	    final CheckBox cb_date = (CheckBox)view.findViewById(R.id.filter_builder_cb_date);
 	    final CheckBox cb_send_type = (CheckBox)view.findViewById(R.id.filter_builder_cb_send_type);
 	    final CheckBox cb_keyword = (CheckBox)view.findViewById(R.id.filter_builder_cb_keyword);
+
+		final Spinner sp_grade_operator = (Spinner)view.findViewById(R.id.filter_builder_sp_grade_operator);
+		ArrayAdapter<CharSequence> grade_operator_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.operators, R.layout.filter_spinner_layout);
+		grade_operator_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		sp_grade_operator.setAdapter(grade_operator_adapter);
+		
+		final Spinner sp_grade = (Spinner)view.findViewById(R.id.filter_builder_sp_grade);
+		ArrayAdapter<CharSequence> grade_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.grade_numbers, R.layout.filter_spinner_layout);
+		grade_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		sp_grade.setAdapter(grade_adapter);
 
 		final Spinner sp_rating_operator = (Spinner)view.findViewById(R.id.filter_builder_sp_rating_operator);
 		ArrayAdapter<CharSequence> rating_operator_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.operators, R.layout.filter_spinner_layout);
@@ -104,6 +115,8 @@ public class FilterDialog extends DialogFragment {
 		});
 		
 		// When item in row is clicked, check checkbox of that row
+		sp_grade_operator.setOnItemSelectedListener(new FilterSpinnerListener());
+		sp_grade.setOnItemSelectedListener(new FilterSpinnerListener());
 		sp_rating_operator.setOnItemSelectedListener(new FilterSpinnerListener());
 		sp_rating.setOnItemSelectedListener(new FilterSpinnerListener());
 		sp_date_operator.setOnItemSelectedListener(new FilterSpinnerListener());
@@ -138,13 +151,17 @@ public class FilterDialog extends DialogFragment {
 	                @Override
 	                public void onClick(View view) {
 	    	    		
-	    	    		if (!cb_rating.isChecked() && !cb_date.isChecked() && !cb_send_type.isChecked() && !cb_keyword.isChecked()) {
+	    	    		if (!cb_grade.isChecked() && !cb_rating.isChecked() && !cb_date.isChecked() && !cb_send_type.isChecked() && !cb_keyword.isChecked()) {
 	    	    			Toast toast = Toast.makeText(getActivity(), (CharSequence)"You did not select any filters to apply.", Toast.LENGTH_SHORT);
 	    	    			toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 0);
 	    	    			toast.show();
 	    	    			return;
 	    	    		}
-	    	    		
+
+	    	    	    if (cb_grade.isChecked()) {
+	    	    	    	String[] grade_numbers = sp_grade.getSelectedItem().toString().split("\\.");
+	    	    	    	filterFields.put("grade_number" + sp_grade_operator.getSelectedItem().toString() + "?", new String[] {grade_numbers[1]});
+	    	    	    }
 	    	    	    if (cb_rating.isChecked()) {
 	    	    	    	filterFields.put("rating" + sp_rating_operator.getSelectedItem().toString() + "?", new String[] {sp_rating.getSelectedItem().toString()});
 	    	    	    }

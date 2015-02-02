@@ -6,6 +6,39 @@
     android:orientation="vertical" >
     
     <LinearLayout
+        android:id="@+id/filter_builder_ll_grade"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+    	android:padding="10dp"
+    	android:layout_marginBottom="20dp"
+	    android:background="#eeeeee" >
+
+        <CheckBox
+            android:id="@+id/filter_builder_cb_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+	    
+	    <TextView
+	        android:layout_height="wrap_content"
+	        android:layout_width="170dp"
+	        android:textSize="20sp"
+	        android:text="Grade" />
+    
+	    <Spinner
+	        android:id="@+id/filter_builder_sp_grade_operator"
+	        android:layout_width="100dp"
+	        android:layout_height="wrap_content" />
+	   	    
+	   	<Spinner
+	        android:id="@+id/filter_builder_sp_grade"
+	        android:layout_width="100dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="20dp" />
+	   	
+	</LinearLayout>
+    
+    <LinearLayout
         android:id="@+id/filter_builder_ll_rating"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"

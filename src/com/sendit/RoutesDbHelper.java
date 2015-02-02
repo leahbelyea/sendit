@@ -14,7 +14,8 @@ public class RoutesDbHelper extends SQLiteOpenHelper {
 			"_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
 			"name TEXT, " +
 			"photo_path TEXT, " +
-			"grade TEXT, " +
+			"grade_number INTEGER, " +
+			"grade_modifier TEXT, " +
 			"crag TEXT, " +
 			"wall TEXT, " +
 			"location TEXT, " +
@@ -45,7 +46,8 @@ public class RoutesDbHelper extends SQLiteOpenHelper {
 		ContentValues values = new ContentValues();
 		values.put("name", route.getName());
 		values.put("photo_path", route.getPhotoPath());
-		values.put("grade", route.getGrade());
+		values.put("grade_number", route.getGradeNumber());
+		values.put("grade_modifier", route.getGradeModifier());
 		values.put("crag", route.getCrag());
 		values.put("wall", route.getWall());
 		values.put("location", Route.locationToString(route.getLocation()));
@@ -64,7 +66,8 @@ public class RoutesDbHelper extends SQLiteOpenHelper {
 		ContentValues values = new ContentValues();
 		values.put("name", route.getName());
 		values.put("photo_path", route.getPhotoPath());
-		values.put("grade", route.getGrade());
+		values.put("grade_number", route.getGradeNumber());
+		values.put("grade_modifier", route.getGradeModifier());
 		values.put("crag", route.getCrag());
 		values.put("wall", route.getWall());
 		values.put("location", Route.locationToString(route.getLocation()));

@@ -190,7 +190,7 @@ public class ViewRoutes extends Activity implements LoaderManager.LoaderCallback
 		final HashMap<Marker, Integer> markerList = new HashMap<Marker, Integer>();
 		if (cursor.moveToFirst()) {
 			while (cursor.isAfterLast() == false) {
-			    Location location = (Route.stringToLocation(cursor.getString(6)));
+			    Location location = (Route.stringToLocation(cursor.getString(7)));
 			    if (location != null) {
 				    LatLng location_coords = new LatLng(location.getLatitude(), location.getLongitude());
 				    String name = cursor.getString(1);
@@ -222,7 +222,7 @@ public class ViewRoutes extends Activity implements LoaderManager.LoaderCallback
 	        @Override
 	        public void onInfoWindowClick(Marker marker) {
 		        cursor.moveToPosition(markerList.get(marker));
-		        Route route = new Route(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), Route.stringToLocation(cursor.getString(6)), cursor.getLong(7), cursor.getString(8), Integer.parseInt(cursor.getString(9)), cursor.getString(10));
+		        Route route = new Route(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), Route.stringToLocation(cursor.getString(7)), cursor.getLong(8), cursor.getString(9), Integer.parseInt(cursor.getString(10)), cursor.getString(11));
 		        Intent i = new Intent(ViewRoutes.this, ViewRoute.class);
 		        Bundle b = new Bundle();
 				b.putString("from", "ViewRoutes");

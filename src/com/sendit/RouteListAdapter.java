@@ -29,9 +29,9 @@ public class RouteListAdapter extends CursorAdapter {
 		ListPicture iv_picture = (ListPicture)view.findViewById(R.id.route_list_item_iv_picture);
 		
 		String name = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(1)));
-		String wall = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(5)));
-		String crag = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(4)));
-		Long date = cursor.getLong(cursor.getColumnIndex(cursor.getColumnName(7)));
+		String wall = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(6)));
+		String crag = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(5)));
+		Long date = cursor.getLong(cursor.getColumnIndex(cursor.getColumnName(8)));
 		String photo_path = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2)));
 		
 		tv_route_name.setText(name);
@@ -79,7 +79,7 @@ public class RouteListAdapter extends CursorAdapter {
 	public Route getRoute(int position) {
 		Cursor cursor = getCursor();
 		if (cursor != null && cursor.moveToPosition(position)) {
-			Route route = new Route(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), Route.stringToLocation(cursor.getString(6)), cursor.getLong(7), cursor.getString(8), Integer.parseInt(cursor.getString(9)), cursor.getString(10));
+			Route route = new Route(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), Route.stringToLocation(cursor.getString(7)), cursor.getLong(8), cursor.getString(9), Integer.parseInt(cursor.getString(10)), cursor.getString(11));
 			return route;
 		}
 		

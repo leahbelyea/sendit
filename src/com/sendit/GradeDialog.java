@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+
 import com.sendit.R;
 
 public class GradeDialog extends DialogFragment {
@@ -19,10 +20,11 @@ public class GradeDialog extends DialogFragment {
 		
 		final Spinner sp_grade_number;
 		final Spinner sp_grade_qualifier;
+		final EditRoute activity = (EditRoute) getActivity();
 		
 	    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 	    // Get the layout inflater
-	    LayoutInflater inflater = getActivity().getLayoutInflater();
+	    LayoutInflater inflater = activity.getLayoutInflater();
 	    
 	    // Inflate and set the layout for the dialog
 	    // Pass null as the parent view because its going in the dialog layout
@@ -49,6 +51,9 @@ public class GradeDialog extends DialogFragment {
 	    		
 	    		EditText et_grade = (EditText)getActivity().findViewById(R.id.edit_route_et_grade);
 	    		et_grade.setText(grade);
+	    		
+	    		String[] grade_number_parts = grade_number.split("\\.");
+	    		activity.setGrade(Integer.parseInt(grade_number_parts[1]), grade_qualifier);
 	    	}
 	    });
 	    

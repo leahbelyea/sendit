@@ -164,6 +164,7 @@ public class ViewRoute extends Activity {
 			}
 			else {
 				rl_location_container.removeView(rl_map_container);
+				rl_location_container.removeView(tv_open_map);
 			}
 		}
 		

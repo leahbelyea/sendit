@@ -57,6 +57,8 @@ public class EditRoute extends Activity {
 	TextView tv_remove_photo_icon;
 	Uri fileUri;
 	String path_to_photo = null;
+	int grade_number;
+	String grade_modifier;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -279,7 +281,7 @@ public class EditRoute extends Activity {
 				RoutesDbHelper db = new RoutesDbHelper(view.getContext());
 				
 				if (action.equals("edit")) {
-					Route updated_route = new Route(route.getId(), name, photo_path, grade, crag, wall, location, date, send_type, rating, notes);
+					Route updated_route = new Route(route.getId(), name, photo_path, grade_number, grade_modifier, crag, wall, location, date, send_type, rating, notes);
 					db.updateRoute(updated_route);
 					Toast.makeText(view.getContext(), (CharSequence)"Your route has been successfully updated!", Toast.LENGTH_LONG).show();
 					
@@ -291,7 +293,7 @@ public class EditRoute extends Activity {
 					startActivity(i_edit);
 				}
 				else if (action.equals("add")) {
-					Route new_route = new Route(name, photo_path, grade, crag, wall, location, date, send_type, rating, notes);
+					Route new_route = new Route(name, photo_path, grade_number, grade_modifier, crag, wall, location, date, send_type, rating, notes);
 					db.addRoute(new_route);
 					Toast.makeText(view.getContext(), (CharSequence)"Your route has been successfully added!", Toast.LENGTH_LONG).show();	
 					Intent i_add = new Intent(view.getContext(), MainActivity.class);
@@ -394,6 +396,11 @@ public class EditRoute extends Activity {
 			}
         	
         });
+	}
+	
+	public void setGrade(int gn, String gm) {
+		grade_number = gn;
+		grade_modifier = gm;
 	}
 
 }
