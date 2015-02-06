@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Calendar;
+
+import com.sendit.R;
+
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -34,7 +37,13 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.sendit.R;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
+import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 
 public class EditRoute extends Activity {
 	
@@ -66,7 +75,7 @@ public class EditRoute extends Activity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); 
 		setContentView(R.layout.activity_edit_route);
-		
+
 		// Get input views
 		et_name = (EditText)findViewById(R.id.edit_route_et_name);
 		iv_photo = (ImageView)findViewById(R.id.edit_route_iv_photo);

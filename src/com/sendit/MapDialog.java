@@ -1,5 +1,10 @@
 package com.sendit;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
+import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
@@ -8,6 +13,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.sendit.R;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -25,10 +31,12 @@ import android.view.SoundEffectConstants;
 import android.view.View;
 import android.widget.EditText;
 
-public class MapDialog extends DialogFragment {
+public class MapDialog extends DialogFragment implements ConnectionCallbacks, OnConnectionFailedListener {
 
 	Location selected_location = null;
 	EditText et_location;
+	GoogleApiClient mGoogleApiClient;
+	LatLng userLocation = new LatLng(45.457083, -66.316777);
 	
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -60,11 +68,7 @@ public class MapDialog extends DialogFragment {
 		        .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker)));
 		}
 		else {
-			LocationManager locationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
-			Criteria c = new Criteria();
-			String provider = locationManager.getBestProvider(c, false);
-	        Location location = locationManager.getLastKnownLocation(provider);
-	        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()) , 10));
+			map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 10));
 		}
 		
 		map.setOnMapLongClickListener(new OnMapLongClickListener() { 
@@ -100,6 +104,22 @@ public class MapDialog extends DialogFragment {
 		ft.remove(fragment);
 		ft.commit();
 		super.onDestroyView();
+	}
+
+	@Override
+	public void onConnected(Bundle connectionHint) {
+        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (mLastLocation != null) {
+        	userLocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        }
+	}
+
+	@Override
+	public void onConnectionSuspended(int cause) {
+	}
+
+	@Override
+	public void onConnectionFailed(ConnectionResult result) {
 	}
 
 }

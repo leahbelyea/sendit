@@ -1,5 +1,6 @@
 package com.sendit;
 
+import com.sendit.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +11,6 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.sendit.R;
 
 public class MainActivity extends Activity {
 
