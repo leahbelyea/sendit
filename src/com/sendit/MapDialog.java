@@ -13,7 +13,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.sendit.R;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -21,9 +20,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.LayoutInflater;
@@ -35,6 +32,7 @@ public class MapDialog extends DialogFragment implements ConnectionCallbacks, On
 
 	Location selected_location = null;
 	EditText et_location;
+	GoogleMap map;
 	GoogleApiClient mGoogleApiClient;
 	LatLng userLocation = new LatLng(45.457083, -66.316777);
 	
@@ -56,7 +54,7 @@ public class MapDialog extends DialogFragment implements ConnectionCallbacks, On
         
         // Get map and set listener
 		MapFragment mapFragment = ((MapFragment) getFragmentManager().findFragmentById(R.id.map_selector_mf_map));
-		final GoogleMap map = mapFragment.getMap();
+		map = mapFragment.getMap();
 		map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 		map.getUiSettings().setRotateGesturesEnabled(false);
 		if (!et_location.getText().toString().equals("")) {
@@ -68,7 +66,12 @@ public class MapDialog extends DialogFragment implements ConnectionCallbacks, On
 		        .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker)));
 		}
 		else {
-			map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 10));
+		    mGoogleApiClient = new GoogleApiClient.Builder(this.getActivity())
+	        .addConnectionCallbacks(this)
+	        .addOnConnectionFailedListener(this)
+	        .addApi(LocationServices.API)
+	        .build();
+		    mGoogleApiClient.connect();
 		}
 		
 		map.setOnMapLongClickListener(new OnMapLongClickListener() { 
@@ -112,14 +115,17 @@ public class MapDialog extends DialogFragment implements ConnectionCallbacks, On
         if (mLastLocation != null) {
         	userLocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
         }
+		map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 10));
 	}
 
 	@Override
 	public void onConnectionSuspended(int cause) {
+		map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 10));
 	}
 
 	@Override
 	public void onConnectionFailed(ConnectionResult result) {
+		map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 10));
 	}
 
 }

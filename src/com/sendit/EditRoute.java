@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Calendar;
-
 import com.sendit.R;
-
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,13 +35,6 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
-import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
 
 public class EditRoute extends Activity {
 	
@@ -277,7 +268,6 @@ public class EditRoute extends Activity {
 				
 				String photo_path = path_to_photo;
 				photo_path = (photo_path == null) ? "" : photo_path;
-				String grade = et_grade.getText().toString();
 				String crag = et_crag.getText().toString();
 				String wall = et_wall.getText().toString();
 				Location location = Route.stringToLocation(et_location.getText().toString());
