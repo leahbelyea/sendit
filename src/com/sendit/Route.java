@@ -109,7 +109,14 @@ public class Route implements Parcelable {
 	}
 	
 	public String getGrade() {
-		return "5." + this.grade_number + this.grade_modifier;
+		if (this.grade_number == 0) {
+			return "";
+		}
+		String grade = "5." + this.grade_number;
+		if (this.grade_modifier != null) {
+			grade += this.grade_modifier;
+		}
+		return grade;
 	}
 	
 	public void setCrag(String crag) {

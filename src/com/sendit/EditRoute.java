@@ -4,7 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Calendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.sendit.R;
+
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -137,7 +141,6 @@ public class EditRoute extends Activity {
 				Intent chooserIntent = Intent.createChooser(pickIntent, pickTitle);
 				chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {takePhotoIntent});
 			    startActivityForResult(chooserIntent, SELECT_PHOTO);
-
 			}
 		});
 		
@@ -309,30 +312,40 @@ public class EditRoute extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         
         if(requestCode == SELECT_PHOTO && resultCode == RESULT_OK) {
-        	if (data == null) { // Photo taken with camera
-	        	path_to_photo = MediaFileHelper.photo_path;
-	        	File file = new File(path_to_photo);
-	            Bitmap bitmap = BitmapDecoder.decodeSampledBitmapFromFile(file.getAbsolutePath(), 1000, 700);
-	        	tv_photo_icon.setText("");
-                addPhotoRemove();
-	        	iv_photo.setImageBitmap(bitmap);
-	        	galleryAddPic(path_to_photo);
+        	if (data != null) {
+        		Pattern pattern = Pattern.compile("^content://");
+                Matcher matcher = pattern.matcher(data.getData().toString());
+               if (matcher.find()) { // Photo selected from gallery
+            	   try {
+            		   final Uri imageUri = data.getData();
+   	                	path_to_photo = getRealPathFromURI(imageUri);
+   	                	File file = new File(path_to_photo);
+   	                	if (!file.exists()) {
+   	                		Toast.makeText(this, (CharSequence)"This photo cannot be accessed by this application.", Toast.LENGTH_LONG).show();
+   	                		path_to_photo = "";
+   	                	}
+   	                	else {
+	   		                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+	   		                Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+	   		                selectedImage = BitmapDecoder.correctImageRotation(selectedImage, path_to_photo);
+	   		                tv_photo_icon.setText("");
+	   		                addPhotoRemove();
+	   		                iv_photo.setImageBitmap(selectedImage);
+   	                	}
+   	            	} catch (FileNotFoundException e) {
+   	            		e.printStackTrace();
+   	            	}
+            	   return;
+               	}
         	}
-        	else { // Photo selected from gallery
-	            try {
-	                final Uri imageUri = data.getData();
-	                path_to_photo = getRealPathFromURI(imageUri);
-	                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-	                Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-	                selectedImage = BitmapDecoder.correctImageRotation(selectedImage, path_to_photo);
-	                tv_photo_icon.setText("");
-	                addPhotoRemove();
-	                iv_photo.setImageBitmap(selectedImage);
-	            } catch (FileNotFoundException e) {
-	                e.printStackTrace();
-	            }
-        	}
-        	
+        	// Photo taken with camera
+        	path_to_photo = MediaFileHelper.photo_path;
+        	File file = new File(path_to_photo);
+            Bitmap bitmap = BitmapDecoder.decodeSampledBitmapFromFile(file.getAbsolutePath(), 1000, 700);
+        	tv_photo_icon.setText("");
+            addPhotoRemove();
+        	iv_photo.setImageBitmap(bitmap);
+        	galleryAddPic(path_to_photo);
         }
     }
 

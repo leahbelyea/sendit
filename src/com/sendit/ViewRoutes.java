@@ -2,6 +2,11 @@ package com.sendit;
 
 import java.util.HashMap;
 import com.sendit.FilterDialog.OnFilterBuiltListener;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
+import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnCameraChangeListener;
@@ -37,7 +42,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
-public class ViewRoutes extends Activity implements LoaderManager.LoaderCallbacks<Cursor>, OnFilterBuiltListener {
+public class ViewRoutes extends Activity implements LoaderManager.LoaderCallbacks<Cursor>, OnFilterBuiltListener, ConnectionCallbacks, OnConnectionFailedListener {
 	
 	SQLiteDatabase db;
 	ViewSwitcher switcher = null;
@@ -46,8 +51,11 @@ public class ViewRoutes extends Activity implements LoaderManager.LoaderCallback
 	String[] filterArgs = null;
 	int boundsCounter;
 	LatLngBounds.Builder bounds;
-	int maxZoom = 15;
+	int maxZoom = 10;
 	Boolean mapDrawn = false;
+	GoogleMap map;
+	GoogleApiClient mGoogleApiClient;
+	LatLng userLocation = new LatLng(46.628260, -66.387396);
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -182,7 +190,7 @@ public class ViewRoutes extends Activity implements LoaderManager.LoaderCallback
 	private GoogleMap populateGoogleMap(final Cursor cursor) {
 		boundsCounter = 0;
 		MapFragment mapFragment = ((MapFragment) getFragmentManager().findFragmentById(R.id.view_routes_mf_map));
-		final GoogleMap map = mapFragment.getMap();
+		map = mapFragment.getMap();
 		map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 		map.getUiSettings().setRotateGesturesEnabled(false);
 		map.clear();
@@ -239,10 +247,38 @@ public class ViewRoutes extends Activity implements LoaderManager.LoaderCallback
     	if (boundsCounter > 0) {
     		map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 200));
     	}
+    	else {
+		    mGoogleApiClient = new GoogleApiClient.Builder(this)
+	        .addConnectionCallbacks(this)
+	        .addOnConnectionFailedListener(this)
+	        .addApi(LocationServices.API)
+	        .build();
+		    mGoogleApiClient.connect();
+    	}
     	// If map is zoomed in too far, zoom out to a maximum value
     	int currentZoom = (int) map.getCameraPosition().zoom;
     	if (currentZoom > maxZoom) {
     		map.moveCamera(CameraUpdateFactory.zoomTo(maxZoom));
     	}
+	}
+
+	@Override
+	public void onConnected(Bundle connectionHint) {
+        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (mLastLocation != null) {
+        	userLocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        }
+
+		map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 7));
+	}
+
+	@Override
+	public void onConnectionSuspended(int cause) {
+		map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 10));
+	}
+
+	@Override
+	public void onConnectionFailed(ConnectionResult result) {
+		map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 10));
 	}
 }
