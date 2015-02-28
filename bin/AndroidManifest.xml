@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sendit"
-    android:versionCode="7"
-    android:versionName="1.0.6" >
+    android:versionCode="8"
+    android:versionName="1.0.7" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -62,7 +62,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="" />
+            android:value="AIzaSyDQIvLiA2ffXyiK_BMg-t0Md9ONADb_E8E" />
         
         <meta-data android:name="com.google.android.gms.version"
         	android:value="@integer/google_play_services_version" />
